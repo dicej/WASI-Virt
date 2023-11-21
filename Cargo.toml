@@ -15,6 +15,8 @@ name = "wasi-virt"
 exclude = ["testapp"]
 members = [
   "virtual-adapter",
+  "virt-to-wasi-adapter",
+  "wasi-to-virt-adapter",
   "tests/components/do-everything",
   "tests/components/file-read",
   "tests/components/get-env",
@@ -29,7 +31,7 @@ panic = "abort"
 rustflags = ["-Zoom=panic"]
 
 [dependencies]
-anyhow = "1"
+anyhow = { version = "1", features = ["backtrace"] }
 clap = { version = "4", features = ["derive"] }
 serde = { version = "1", features = ["derive"] }
 toml = "0.7"
@@ -42,10 +44,10 @@ wasm-opt = "0.114.1"
 wit-component = "0.18.0"
 
 [build-dependencies]
-anyhow = "1"
+anyhow = { version = "1", features = ["backtrace"] }
 
 [dev-dependencies]
-anyhow = "1"
+anyhow = { version = "1", features = ["backtrace"] }
 cap-std = "1.0.12"
 heck = { version = "0.4" }
 tokio = { version = "1.30.0", features = ["macros"] }
@@ -54,6 +56,6 @@ wasmtime-wasi = "14.0.4"
 wasmparser = "0.116.1"
 
 [workspace.dependencies]
-anyhow = "1"
+anyhow = { version = "1", features = ["backtrace"] }
 # TODO: switch to upstream once https://github.com/bytecodealliance/wit-bindgen/pull/753 is merged
 wit-bindgen = { git = "https://github.com/dicej/wit-bindgen", branch = "resource-take" }

@@ -27,6 +27,9 @@ pub use virt_io::{FsEntry, StdioCfg, VirtFs, VirtualFiles};
 const VIRT_ADAPTER: &[u8] = include_bytes!("../lib/virtual_adapter.wasm");
 const VIRT_ADAPTER_DEBUG: &[u8] = include_bytes!("../lib/virtual_adapter.debug.wasm");
 
+pub const VIRT_TO_WASI_ADAPTER: &[u8] = include_bytes!("../lib/virt_to_wasi_adapter.wasm");
+pub const WASI_TO_VIRT_ADAPTER: &[u8] = include_bytes!("../lib/wasi_to_virt_adapter.wasm");
+
 /// Virtualization options
 ///
 /// When subsystems are not virtualized, their imports and exports

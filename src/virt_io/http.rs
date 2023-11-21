@@ -45,6 +45,7 @@ const WASI_HTTP_EXPORTS: &[&str] = &[
     "wasi:http/types@0.2.0-rc-2023-10-18#[method]future-incoming-response.get",
     "wasi:http/types@0.2.0-rc-2023-10-18#[method]future-incoming-response.subscribe",
     "wasi:http/outgoing-handler@0.2.0-rc-2023-10-18#handle",
+    "local:virt/incoming-http#get-params",
 ];
 
 /// Strip exported WASI functions that implement HTTP access

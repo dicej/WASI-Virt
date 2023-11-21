@@ -1,3 +1,4 @@
+use crate::exports::local::virt::incoming_http::Guest as IncomingHttp;
 use crate::exports::wasi::cli::stderr::Guest as Stderr;
 use crate::exports::wasi::cli::stdin::Guest as Stdin;
 use crate::exports::wasi::cli::stdout::Guest as Stdout;
@@ -43,6 +44,7 @@ use crate::wasi::filesystem::types as filesystem_types;
 use crate::wasi::io::streams;
 
 // these are all the subsystems which touch streams + poll
+use crate::local::virt::incoming_http;
 use crate::wasi::clocks::monotonic_clock;
 use crate::wasi::http::outgoing_handler;
 use crate::wasi::http::types as http_types;
@@ -607,6 +609,16 @@ impl OutgoingHandler for VirtAdapter {
         outgoing_handler::handle(Resource::take(request).0, options.map(request_options_map))
             .map(|response| Resource::new(HttpFutureIncomingResponse(response)))
             .map_err(http_err_map_rev)
+    }
+}
+
+impl IncomingHttp for VirtAdapter {
+    fn get_params() -> (Resource<IncomingRequest>, Resource<ResponseOutparam>) {
+        let (request, outparam) = incoming_http::get_params();
+        (
+            Resource::new(HttpIncomingRequest(request)),
+            Resource::new(HttpResponseOutparam(outparam)),
+        )
     }
 }
 
